@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { LoginUser, RegisterUser } from "../Redux/Actions/AccountAction";
 import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined } from "@ant-design/icons";
-export default function RegisterForm() {
+
+export default function RegisterOwnerForm() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ export default function RegisterForm() {
             // console.log(value)
             // dispatch(RegisterLocal(value, MoveToLogin))
             // console.log({...value, type: "USER"});
-            dispatch(RegisterUser({...value, type: "USER"}, MoveToLogin))
+            dispatch(RegisterUser({...value, type: "OWNER"}, MoveToLogin))
         }
         else alert("Mật khẩu nhập lại không đúng!")
     }

@@ -1,21 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
 import LoginForm from "../Components/LoginForm";
 import BackToHome from "../Components/BackToHome";
-import { useSelector } from "react-redux";
 
-import { useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
-  const {isLogin} = useSelector(state => state.AccountReducer)
-  const navigate = useNavigate();
-
-  console.log(isLogin);
-
-  useEffect(() => {
-    if(isLogin)
-      navigate('/');
-  }, [isLogin])
-
+export default function LoginOwnerPage() {
   return (
     <div className="flex justify-center h-screen pt-16" style={{
         backgroundImage: `url(${
@@ -42,9 +30,10 @@ export default function LoginPage() {
             }}
           ></div>
           <h1 className="font-bold text-2xl">Đăng nhập</h1>
+          <p>Chủ xe</p>
         </div>
         {<LoginForm />}
       </div>
     </div>
-  );
+  )
 }

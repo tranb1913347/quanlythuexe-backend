@@ -42,6 +42,8 @@ export const RegisterUser = (_dataRegister, _navigate) => {
     try {
       let {data} = await AccountService.Register(_dataRegister)
       successNotification("Đăng kí thành công", "Bạn đã đăng kí tài khoảng thành công!!")
+      localStorage.removeItem("login_user");
+
       _navigate()
       console.log(data)
     } catch (error) {

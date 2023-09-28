@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import UserButton from "./UserButton";
+import { useDispatch, useSelector  } from 'react-redux'
+import RegisterRootUser from "./RegisterRootUser";
 
 
-export default function MenuHeader() {
+export default function MenuAdminHeader() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   let userData = localStorage.getItem("login_user");
   userData = userData && JSON.parse(userData);
   if (!userData) userData = {};
@@ -24,26 +27,21 @@ export default function MenuHeader() {
         ></div>
         <div className="flex items-center">
           <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/"}>
-            Trang chủ
+            Quản lý tài khoản
           </NavLink>
-          <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/"}>
-            Giới thiệu
-          </NavLink>
-          <NavLink className="mx-4 hover:text-yellow-300 duration-100 border-r-2 pr-4" to={"/registerowner"}>
-            Trở thành chủ xe?
+          <NavLink className="mx-4 hover:text-yellow-300 duration-100 border-r-2 pr-4"
+            onClick={() => {
+              dispatch({
+                type: "SHOW_MODAL_WITH_CONTENT",
+                content: <RegisterRootUser/>,
+                title: "ĐĂNG KÝ ADMIN"
+              })
+            }}
+          >
+            Tạo thêm Admin
           </NavLink>
           {/* BUTTON CONTROL  */}
-          {(!userData.username) ? 
-          
-          <div>
-            <NavLink className="mx-2" to={"/login"}>
-            <button className="bg-blue-400 duration-100 hover:scale-110 p-2 rounded-xl">Đăng nhập</button>
-          </NavLink>
-          <NavLink className="mx-2" to={"/register"}>
-            <button className="bg-white p-2 duration-100 hover:scale-110 text-red-500 rounded-xl">Đăng kí</button>
-          </NavLink> 
-          </div>
-          :
+         
           <Popover content={<UserButton/>} placement='bottomRight' trigger={"click"} className="flex items-center hover:text-yellow-200 cursor-pointer">
             <UserOutlined className="text-2xl border rounded-full px-2 pb-2 mr-2"/>
             <div>
@@ -52,7 +50,7 @@ export default function MenuHeader() {
             </div>
           </Popover>
           
-          }
+          
 
         </div>
       </div>

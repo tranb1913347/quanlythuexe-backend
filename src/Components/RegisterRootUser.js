@@ -1,32 +1,95 @@
-import React from 'react'
 import { Button, Checkbox, Form, Input } from "antd";
+
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
-import { LoginUser, RegisterUser } from "../Redux/Actions/AccountAction";
+import { RegisterRootUserAction } from "../Redux/Actions/ManagerAction";
+import { RegisterUser } from "../Redux/Actions/AccountAction";
 import { UserOutlined, LockOutlined, MailOutlined, PhoneOutlined } from "@ant-design/icons";
-export default function RegisterForm() {
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+export default function RegisterRootUser() {
+  const dispatch = useDispatch();
+
+  const [dataRegister, setDataRegister] = useState({
+    rootname: "",
+    password: "",
+    repassword: "",
+    email: "",
+  });
+
+  const changeData = (e) => {
+    const { value, name } = e.target;
+    setDataRegister({
+      ...dataRegister,
+      [name]: value,
+    });
+  };
 
 
-    const MoveToLogin = () => {
-      navigate('/login')
+
+  const onFinish = (value) => {
+    if (value.password === value.repassword){
+      console.log({
+        ...value,
+        type: "ADMIN"
+      });
+      dispatch(RegisterUser({...value, type: "ADMIN"}))
+
     }
-
-    const onFinish = (value) => {
-        if (value.password === value.repassword){
-            // console.log(value)
-            // dispatch(RegisterLocal(value, MoveToLogin))
-            // console.log({...value, type: "USER"});
-            dispatch(RegisterUser({...value, type: "USER"}, MoveToLogin))
-        }
-        else alert("Mật khẩu nhập lại không đúng!")
-    }
+    else alert("Mật khẩu nhập lại không đúng!")
+}
 
   return (
-    <div className="relative z-20">
-    <Form
+    <div>
+      {/* <Form>
+        <Input
+          value={dataRegister.rootname}
+          className="my-2"
+          onChange={(e) => {
+            changeData(e);
+          }}
+          name="rootname"
+          placeholder="Nhập tên Admin"
+        />
+        <Input
+          value={dataRegister.email}
+          className="my-2"
+          onChange={(e) => {
+            changeData(e);
+          }}
+          name="email"
+          placeholder="Nhập Email"
+        />
+        <Input
+          value={dataRegister.password}
+          className="my-2"
+          onChange={(e) => {
+            changeData(e);
+          }}
+          name="password"
+          placeholder="Nhập Mật khẩu"
+        />
+        <Input
+          value={dataRegister.repassword}
+          className="my-2"
+          onChange={(e) => {
+            changeData(e);
+          }}
+          name="repassword"
+          placeholder="Xác nhận lại mật khẩu"
+        />
+
+        <div className="flex justify-center">
+          <button
+            onClick={() => {
+              submitButton();
+            }}
+            className="w-20 rounded-md my-5 py-2 bg-red-500 text-white"
+          >
+            REGISTER
+          </button>
+        </div>
+      </Form> */}
+       <Form
       name="basic"
       // labelCol={{ span: 8 }}
       // wrapperCol={{ span: 16 }}
@@ -114,13 +177,7 @@ export default function RegisterForm() {
         </Button>
       </Form.Item>
 
-      <div className="text-center">
-        <p >Bạn đã có tài khoản?</p>
-        <p className="text-blue-600 hover:text-blue-300 cursor-pointer"
-          onClick={MoveToLogin}
-        >Đằng nhập ngay</p>
-        </div>
     </Form>
-  </div>
-  )
+    </div>
+  );
 }
