@@ -34,10 +34,10 @@ export const AddNewMenu = (_data, _dataImg) => {
   return async (dispatch) => {
     try {
       let {data} = await ManagerService.AddNewMenu(_data);
-      let dataImage = await ManagerService.UploadImageServer(data.id, _dataImg, "MenuImage")
+      let dataImage = await ManagerService.UploadImageServer(data.id, _dataImg, "CarImage")
       console.log(dataImage)
       dispatch({type:'CLOSE_MODAL'})
-      dispatch(GetMenuList(data.type))
+      dispatch(GetCarOwner(data.ownerID))
     } catch (error) {
       console.log(error)
     }
@@ -171,12 +171,12 @@ export const RegisterRootUserAction = (_data) => {
   }
 }
 
-export const GetAllCamnang = () => {
+export const GetAllCar = () => {
   return async (dispatch) => {
     try {
-      let {data} = await ManagerService.GetCamnangList();
+      let {data} = await ManagerService.GetAllCar();
       dispatch({
-        type: "GET_CAM_NANG_LIST",
+        type: "GET_CAR_OWNER",
         content: data
       })
       console.log(data);
@@ -186,12 +186,12 @@ export const GetAllCamnang = () => {
   }
 }
 
-export const DeleteCamnang = (_id) => {
+export const DeleteCar = (_id, _ownerID) => {
   return async (dispatch) => {
    try {
-    await ManagerService.DeleteCamnang(_id);
-    successNotification("Xóa thành công", "Bạn đã xóa 1 Cẩm nang thành công!!")
-    dispatch(GetAllCamnang());
+    await ManagerService.DeleteCar(_id);
+    successNotification("Xóa thành công", "Bạn đã xóa 1 xe thành công!!")
+    dispatch(GetCarOwner(_ownerID));
    } catch (error) {
     console.log(error)
     errorNotification("Xóa thất bại", "Vui lòng kiểm tra lại đường truyền!")
@@ -201,34 +201,21 @@ export const DeleteCamnang = (_id) => {
 }
 
 
-export const AddNewCamnang = (_data, _dataImg) => {
+
+
+
+export const GetCarOwner = (_id) => {
+  console.log(_id);
   return async (dispatch) => {
     try {
-      let {data} = await ManagerService.AddNewCamnang(_data);
-      let dataImage = await ManagerService.UploadImageCamnang(data.id, _dataImg, "CamnangImage")
-      dispatch({type:'CLOSE_MODAL'})
-      dispatch(GetAllCamnang())
+      let {data} = await ManagerService.GetCarOwner(_id);
+      dispatch({
+        type: "GET_CAR_OWNER",
+        content: data
+      })
+      console.log(data);
     } catch (error) {
-      console.log(error)
-    }
-  }
-}
-
-export const UpdateCamnang = (_dataMenu, _menuId, _dataImg) => {
-  return async (dispatch) => {
-    try {
-      let {data} = await ManagerService.UpdateCamnang(_dataMenu, _menuId);
-      if(_dataImg){
-        let dataImage = await ManagerService.UploadImageCamnang(data.id, _dataImg, "CamnangImage")
-      }
-      dispatch(GetAllCamnang())
-      dispatch({type:'CLOSE_MODAL'})
-
-      successNotification("Cập nhật thành công", "Bạn đã cập nhật 1 Cẩm nang thành công!!")
-
-    } catch (error) {
-      errorNotification("Cập nhật thất bại", "Vui lòng kiểm tra lại đường truyền!")
-      
+      console.log(error);
     }
   }
 }

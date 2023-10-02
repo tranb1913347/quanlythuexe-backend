@@ -26,8 +26,11 @@ export default function MenuAdminHeader() {
           }}
         ></div>
         <div className="flex items-center">
-          <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/"}>
+          <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/admin"}>
             Quản lý tài khoản
+          </NavLink>
+          <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/admin/danhsachxe"}>
+            Danh sách xe
           </NavLink>
           <NavLink className="mx-4 hover:text-yellow-300 duration-100 border-r-2 pr-4"
             onClick={() => {

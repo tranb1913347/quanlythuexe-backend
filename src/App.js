@@ -8,6 +8,9 @@ import LoginOwnerPage from './Pages/LoginOwnerPage';
 import RegisterOwnerPage from './Pages/RegisterOwnerPage';
 import AdminPage from './Pages/AdminPage';
 import ModalTemplate from './Template/ModalTemplate';
+import Quanlyxe from './Pages/Quanlyxe';
+import Danhsachxe from './Pages/Danhsachxe';
+import DanhsachxeAdmin from './Pages/DanhsachxeAdmin';
 
 function App() {
   return (
@@ -21,6 +24,10 @@ function App() {
           <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/admin' element={<AdminPage/>}/>
           <Route path='/registerowner' element={<RegisterOwnerPage/>}/>
+          <Route path='/quanlyxe' element={<Quanlyxe/>}/>
+          <Route path='/danhsachxe' element={<Danhsachxe/>}/>
+          <Route path='/admin/danhsachxe' element={<DanhsachxeAdmin/>}/>
+
         </Routes>
       </BrowserRouter>
     </div>

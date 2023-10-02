@@ -11,7 +11,7 @@ export const ManagerService = {
 
     AddNewMenu: (_data) => {
       return axios({
-        url: `${BASE_URL}/menus/addnewmenu`,
+        url: `${BASE_URL}/car/create`,
         method: 'post',
         data: _data
       })
@@ -21,7 +21,7 @@ export const ManagerService = {
       let formData = new FormData();
       formData.append(_nameForm, _dataImg);
       return axios({
-        url: `${BASE_URL}/menus/uploadimg/${_menuId}`,
+        url: `${BASE_URL}/car/uploadimg/${_menuId}`,
         data: formData,
         method: "POST",
         headers: {
@@ -96,16 +96,16 @@ export const ManagerService = {
       })
     },
 
-    GetCamnangList: () => {
+    GetAllCar: () => {
       return axios({
-        url: `${BASE_URL}/camnang/getall`,
+        url: `${BASE_URL}/car/getall`,
         method: "GET"
       })
     },
 
-    DeleteCamnang: (_id) => {
+    DeleteCar: (_id) => {
       return axios({
-        url:  `${BASE_URL}/camnang/delete/${_id}`,
+        url:  `${BASE_URL}/car/delete/${_id}`,
         method: "DELETE"
       })
     }
@@ -138,4 +138,11 @@ export const ManagerService = {
         data: _dataMenu
       })
     },
+
+    GetCarOwner: (_id) => {
+      return axios({
+        url:`${BASE_URL}/car/getbyowner/${_id}`,
+        method: 'GET'
+      })
+    }
 }

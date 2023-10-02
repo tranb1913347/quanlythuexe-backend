@@ -4,7 +4,8 @@ const stateDefault = {
     initContent: {},
     userList: [],
     rootList: [],
-    camnangList: []
+    camnangList: [],
+    carList: [],
 }
 
 export const ManagerReducer = (state = stateDefault, action) => {
@@ -28,6 +29,10 @@ export const ManagerReducer = (state = stateDefault, action) => {
     }
     case "GET_CAM_NANG_LIST":{
         state.camnangList = action.content;
+        return {...state}
+    }
+    case "GET_CAR_OWNER":{
+        state.carList = action.content;
         return {...state}
     }
     default:

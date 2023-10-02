@@ -23,8 +23,15 @@ export default function MenuHeader() {
           }}
         ></div>
         <div className="flex items-center">
+          {
+            (userData.type === 'USER' || !userData.username) ?
+          
+          <div>
           <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/"}>
             Trang chủ
+          </NavLink>
+          <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/danhsachxe"}>
+            Danh sách xe
           </NavLink>
           <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/"}>
             Giới thiệu
@@ -32,6 +39,17 @@ export default function MenuHeader() {
           <NavLink className="mx-4 hover:text-yellow-300 duration-100 border-r-2 pr-4" to={"/registerowner"}>
             Trở thành chủ xe?
           </NavLink>
+          </div>
+          :
+          <div>
+          <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/quanlyxe"}>
+            Quản lý xe
+          </NavLink>
+          <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/"}>
+            Quản lý dịch vụ thuê
+          </NavLink>
+          </div>
+          }
           {/* BUTTON CONTROL  */}
           {(!userData.username) ? 
           
