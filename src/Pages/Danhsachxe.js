@@ -6,6 +6,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button } from 'antd';
 import AddNewCar from '../Components/AddNewCar';
 import { useNavigate } from 'react-router-dom';
+import SearchButton from '../Components/Search';
 
 export default function Danhsachxe() {
 
@@ -18,8 +19,8 @@ export default function Danhsachxe() {
 
 
     const CarContent = carList.map((item, index) => {
-        return  <div key={index} className='flex bg-slate-50 shadow-md rounded-sm py-5 px-2 mx-20 mt-5 relative mb-5'>
-        <div className='w-40 rounded-md overflow-hidden md:h-40 h-24 mr-10'
+        return  <div key={index} className='bg-blue-50 shadow-md w-full rounded-sm py-5 px-2 relative'>
+        <div className='w-full rounded-md overflow-hidden h-56 mr-10'
         style={{
             backgroundImage: `url(${item.image?.replaceAll(
                 "\\",
@@ -49,9 +50,12 @@ export default function Danhsachxe() {
 
   return (
     
-    <div>
+    <div className='pb-20'>
         <MenuHeader/>
+        <SearchButton/>
+        <div className='grid mt-5 grid-cols-4 px-20 gap-6 w-full'>
         {CarContent}
+        </div>
     </div>
   )
 }

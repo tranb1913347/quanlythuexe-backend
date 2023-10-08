@@ -133,7 +133,7 @@ export const ManagerService = {
 
     UpdateCamnang: (_dataMenu, _menuId) => {
       return axios({
-        url: `${BASE_URL}/camnang/update/${_menuId}`,
+        url: `${BASE_URL}/car/update/${_menuId}`,
         method: 'PUT',
         data: _dataMenu
       })

@@ -219,3 +219,22 @@ export const GetCarOwner = (_id) => {
     }
   }
 }
+
+export const UpdateCar = (_dataMenu, _menuId, _dataImg) => {
+  return async (dispatch) => {
+    try {
+      let {data} = await ManagerService.UpdateCamnang(_dataMenu, _menuId);
+      if(_dataImg){
+        let dataImage = await ManagerService.UploadImageServer(data.id, _dataImg, "CarImage")
+      }
+      dispatch(GetAllCar())
+      dispatch({type:'CLOSE_MODAL'})
+
+      successNotification("Cập nhật thành công", "Bạn đã cập nhật thông tin xe thành công!!")
+
+    } catch (error) {
+      errorNotification("Cập nhật thất bại", "Vui lòng kiểm tra lại đường truyền!")
+      
+    }
+  }
+}

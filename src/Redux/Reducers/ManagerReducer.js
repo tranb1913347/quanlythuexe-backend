@@ -6,6 +6,7 @@ const stateDefault = {
     rootList: [],
     camnangList: [],
     carList: [],
+    initCarList: []
 }
 
 export const ManagerReducer = (state = stateDefault, action) => {
@@ -33,7 +34,28 @@ export const ManagerReducer = (state = stateDefault, action) => {
     }
     case "GET_CAR_OWNER":{
         state.carList = action.content;
+        state.initCarList = action.content;
         return {...state}
+    }
+    case "SEARCH_BY_NAME":{
+        state.carList = state.initCarList.filter((item) => {
+          return item.name.toLowerCase().search(action.content.toLowerCase()) !== -1
+        })
+        
+        return {...state}
+    }
+    case "SEARCH_BY_COMPANY": {
+        state.carList = state.initCarList.filter((item) => {
+            return item.company.toLowerCase().search(action.content.toLowerCase()) !== -1
+          })
+          
+          return {...state}
+    }
+    case "SEARCH_BY_NUMBER": {
+        state.carList = state.initCarList.filter((item) => {
+            return item.numberOfSeat === parseInt(action.content)
+          })
+          return {...state}
     }
     default:
         return {...state}
