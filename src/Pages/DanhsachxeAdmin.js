@@ -37,6 +37,20 @@ export default function DanhsachxeAdmin() {
           <p>Số chổ: {item.numberOfSeat}</p>
           <p>Giá cho thuê: {item.cost} VND</p>
           <p style={{whiteSpace: 'pre-line'}}>Mô tả: {item.description}</p>
+          <div className='absolute bottom-2 flex right-2'>
+          <button 
+          className='bg-blue-500 hover:bg-blue-400 flex items-center rounded-md md:py-2 md:px-3 p-1 mr-2 text-white'
+         
+          >
+            <EditOutlined/>
+          </button>
+          <button 
+          className='bg-red-500 hover:bg-red-400 flex items-center rounded-md md:py-2 md:px-3 p-1 text-white'
+          
+          >
+            <DeleteOutlined/>
+          </button>
+        </div>
         </div>
   
       </div> 

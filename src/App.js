@@ -11,6 +11,8 @@ import ModalTemplate from './Template/ModalTemplate';
 import Quanlyxe from './Pages/Quanlyxe';
 import Danhsachxe from './Pages/Danhsachxe';
 import DanhsachxeAdmin from './Pages/DanhsachxeAdmin';
+import Xedathue from './Components/xedathue';
+import Quanlythuexe from './Components/quanlydichvu';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path='/loginowner' element={<LoginOwnerPage/>}/>
           <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/admin' element={<AdminPage/>}/>
+          <Route path='/xedathue' element={<Xedathue/>}/>
+          <Route path='/quanlythuexe' element={<Quanlythuexe/>}/>
           <Route path='/registerowner' element={<RegisterOwnerPage/>}/>
           <Route path='/quanlyxe' element={<Quanlyxe/>}/>
           <Route path='/danhsachxe' element={<Danhsachxe/>}/>

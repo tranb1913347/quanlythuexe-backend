@@ -33,8 +33,8 @@ export default function MenuHeader() {
           <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/danhsachxe"}>
             Danh sách xe
           </NavLink>
-          <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/"}>
-            Giới thiệu
+          <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/xedathue"}>
+            Xe đã thuê
           </NavLink>
           <NavLink className="mx-4 hover:text-yellow-300 duration-100 border-r-2 pr-4" to={"/registerowner"}>
             Trở thành chủ xe?
@@ -45,7 +45,7 @@ export default function MenuHeader() {
           <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/quanlyxe"}>
             Quản lý xe
           </NavLink>
-          <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/"}>
+          <NavLink className="mx-4 hover:text-yellow-300 duration-100" to={"/quanlythuexe"}>
             Quản lý dịch vụ thuê
           </NavLink>
           </div>

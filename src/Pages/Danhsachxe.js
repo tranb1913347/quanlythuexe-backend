@@ -7,6 +7,8 @@ import { Button } from 'antd';
 import AddNewCar from '../Components/AddNewCar';
 import { useNavigate } from 'react-router-dom';
 import SearchButton from '../Components/Search';
+import EditCarForm from '../Components/EditCarForm';
+import ThuexeForm from '../Components/ThuexeForm';
 
 export default function Danhsachxe() {
 
@@ -17,6 +19,17 @@ export default function Danhsachxe() {
     userData = userData && JSON.parse(userData);
     if (!userData) userData = {};
 
+    const editCarButton = (_item) => {
+      dispatch({
+        type: "SET_INIT_CONTENT",
+        content: _item
+      })
+      dispatch({
+        type: "SHOW_MODAL_WITH_CONTENT",
+        title: "CHỈNH SỬA THÔNG TIN XE",
+        content: <ThuexeForm/>
+      })
+    }
 
     const CarContent = carList.map((item, index) => {
         return  <div key={index} className='bg-blue-50 shadow-md w-full rounded-sm py-5 px-2 relative'>
@@ -37,6 +50,9 @@ export default function Danhsachxe() {
           <p>Số chổ: {item.numberOfSeat}</p>
           <p>Giá cho thuê: {item.cost} VND</p>
           <p style={{whiteSpace: 'pre-line'}}>Mô tả: {item.description}</p>
+          <button onClick={() => {
+            editCarButton(item)
+          }} className='bg-red-500 text-white w-40 rounded-md p-2 ml-20 mt-5 shadow-lg hover:scale-110 duration-100'>Thuê ngay!</button>
         </div>
   
       </div> 
