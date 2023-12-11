@@ -7,10 +7,15 @@ import { useEffect } from 'react'
 import React from 'react'
 import { AddNewMenu, UpdateCar, UpdateMenu } from '../Redux/Actions/ManagerAction'
 import { DatePicker, Space } from 'antd';
+import { CreateNewRental } from '../Redux/Actions/RentalAction'
 
 const { RangePicker } = DatePicker;
 
 export default function ThuexeForm() {
+
+    let userData = localStorage.getItem("login_user");
+    userData = userData && JSON.parse(userData);
+    if (!userData) userData = {};
 
     const dispatch = useDispatch();
 
@@ -18,11 +23,14 @@ export default function ThuexeForm() {
 
     const [selectedImage, setSelectedImage] = useState();
     const [dataContent, setDataContent] = useState({
-        name: '',
-        company: '',
-        numberOfSeat: '',
-        cost: '',
-        description:''
+       userID: "",
+       carID: "",
+       note: "",
+       address: "",
+       startDate: "",
+       endDate: "",
+       status: true,
+       username: ''
     })
 
 
@@ -40,28 +48,39 @@ export default function ThuexeForm() {
         })
     }
 
+    const getDate = (date, dateString) => {
+      setDataContent({
+        ...dataContent,
+        startDate: dateString[0],
+        endDate: dateString[1],
+      })
+      console.log(dataContent);
+    }
     const submitButton = () => {
-      dispatch(UpdateCar(
-        {
-            name: dataContent.name,
-            company: dataContent.company,
-            numberOfSeat: dataContent.numberOfSeat,
-            cost: dataContent.cost,
-            description: dataContent.description,
-        },
-        initContent.id,
-        selectedImage
-      ))
-      setSelectedImage()
+      // dispatch(UpdateCar(
+      //   {
+      //       name: dataContent.name,
+      //       company: dataContent.company,
+      //       numberOfSeat: dataContent.numberOfSeat,
+      //       cost: dataContent.cost,
+      //       description: dataContent.description,
+      //   },
+      //   initContent.id,
+      //   selectedImage
+      // ))
+      // setSelectedImage()
+      dispatch(CreateNewRental(dataContent))
+      console.log(dataContent);
     }
 
     useEffect(() => {
         setDataContent({
-            name: initContent.name,
-            company: initContent.company,
-            numberOfSeat: initContent.numberOfSeat,
+          ...dataContent,
+            carID: initContent.id,
             cost: initContent.cost,
-            description: initContent.description
+            userID: userData.id,
+            username: userData.username,
+            status: false
         })
     }, [initContent])
     
@@ -96,12 +115,14 @@ export default function ThuexeForm() {
             </div>
             <div>
             <p><b>Thời gian thuê xe:</b> </p>
-            <RangePicker className='w-full' showTime /> 
+            <RangePicker className='w-full'onChange={(date, datestring) => {
+              getDate(date, datestring)
+            }} showTime /> 
 
             <p><b>Địa chỉ thuê:</b> </p>
-            <Input onChange={getDataContent} name='numberOfSeat' type="number" value={dataContent.numberOfSeat} className='mb-2' placeholder='Nhập số chổ ngồi'></Input>
+            <Input onChange={getDataContent} name='address' type="text" value={dataContent.address} className='mb-2' placeholder='Nhập địa chỉ'></Input>
             <p><b>Ghi chú:</b> </p>
-            <Input onChange={getDataContent} name='cost' type="text" value={dataContent.cost} className='mb-2' placeholder='Nhập giá cho thuê'></Input>
+            <Input onChange={getDataContent} name='note' type="text" value={dataContent.note} className='mb-2' placeholder='Nhập ghi chú'></Input>
          </div>
         </div>
         <div className='flex justify-center'>

@@ -6,7 +6,8 @@ const stateDefault = {
     rootList: [],
     camnangList: [],
     carList: [],
-    initCarList: []
+    initCarList: [],
+    rentalList: [],
 }
 
 export const ManagerReducer = (state = stateDefault, action) => {
@@ -56,6 +57,11 @@ export const ManagerReducer = (state = stateDefault, action) => {
             return item.numberOfSeat === parseInt(action.content)
           })
           return {...state}
+    }
+
+    case "GET_RENTALS": {
+        state.rentalList = action.content;
+        return {...state}
     }
     default:
         return {...state}
