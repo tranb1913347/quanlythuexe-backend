@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 import { RentalService } from '../../Services/RentalService';
+import { GetAllCar } from './ManagerAction';
 
 
 let listUser = localStorage.getItem("list_user");
@@ -25,6 +26,8 @@ export const CreateNewRental = (_data) => {
     try {
         let {data} = await RentalService.CreateNewRental(_data);
         successNotification("Đăng ký thành công", "Bạn đã đăng ký thuê xe thành công!!");
+        dispatch({type:'CLOSE_MODAL'})
+        dispatch(GetAllCar());
         console.log(data);
     } catch (error) {
        errorNotification("Đăng ký thất bại", "Kiểm tra lại thông tin đăng ký!")

@@ -85,6 +85,9 @@ export default function Xedathue() {
           <p style={{ whiteSpace: "pre-line" }}>
             <b> <MessageOutlined /> Ghi chú:</b> {item.note}
           </p>
+          {(item.status === "1") ?  
+          ""
+          :
           <button  className=" absolute right-0 bottom-0  bg-red-500 text-white w-40 rounded-md p-2 ml-20 mt-5 shadow-lg hover:scale-110 duration-100"
           onClick={() => {
             dispatch(DeleteRental(item.id, userData.id))
@@ -93,6 +96,8 @@ export default function Xedathue() {
             Hủy thuê
             <DeleteOutlined />
           </button>
+        }
+         
           {(item.status === "1") ?  
           <p className="text-green-400 font-bold">
           <i>Đơn thuê đã được xác nhận bởi chủ xe <ExclamationCircleFilled /></i>

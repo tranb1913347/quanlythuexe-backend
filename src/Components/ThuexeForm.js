@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import React from 'react'
 import { AddNewMenu, UpdateCar, UpdateMenu } from '../Redux/Actions/ManagerAction'
 import { DatePicker, Space } from 'antd';
-import { CreateNewRental } from '../Redux/Actions/RentalAction'
+import { CreateNewRental, GetAllRental } from '../Redux/Actions/RentalAction'
 
 const { RangePicker } = DatePicker;
 
@@ -19,7 +19,7 @@ export default function ThuexeForm() {
 
     const dispatch = useDispatch();
 
-    const {initContent} = useSelector(state => state.ManagerReducer);
+    const {initContent, rentalList} = useSelector(state => state.ManagerReducer);
 
     const [selectedImage, setSelectedImage] = useState();
     const [dataContent, setDataContent] = useState({
@@ -30,7 +30,8 @@ export default function ThuexeForm() {
        startDate: "",
        endDate: "",
        status: true,
-       username: ''
+       username: '',
+       cancuoc: ""
     })
 
 
@@ -56,6 +57,17 @@ export default function ThuexeForm() {
       })
       console.log(dataContent);
     }
+
+    const check_data = () => {
+      for(let item in rentalList){
+        if(item.carID === dataContent.carID){
+          if(test.startDate > dataContent.startDate) return false;
+          if (test.endDate < dataContent.endDate) return false;
+        }
+      }
+      return true;
+    }
+
     const submitButton = () => {
       // dispatch(UpdateCar(
       //   {
@@ -69,8 +81,11 @@ export default function ThuexeForm() {
       //   selectedImage
       // ))
       // setSelectedImage()
-      dispatch(CreateNewRental(dataContent))
-      console.log(dataContent);
+      if(check_data){
+        dispatch(CreateNewRental(dataContent))
+        console.log(dataContent);
+      }
+      else alert("Xe bạn muốn thuê đã có lịch vào thời gian này!")
     }
 
     useEffect(() => {
@@ -84,7 +99,9 @@ export default function ThuexeForm() {
         })
     }, [initContent])
     
-    
+    useEffect(() => {
+      dispatch(GetAllRental());
+    }, [])
   return (
     <div className='w-full'>
         <div className='w-full'>
@@ -121,6 +138,9 @@ export default function ThuexeForm() {
 
             <p><b>Địa chỉ thuê:</b> </p>
             <Input onChange={getDataContent} name='address' type="text" value={dataContent.address} className='mb-2' placeholder='Nhập địa chỉ'></Input>
+            <p><b>Số căn cước công dân:</b></p>
+            <Input onChange={getDataContent} name='cancuoc' type="text" value={dataContent.cancuoc} className='mb-2' placeholder='Nhập căn cước'></Input>
+
             <p><b>Ghi chú:</b> </p>
             <Input onChange={getDataContent} name='note' type="text" value={dataContent.note} className='mb-2' placeholder='Nhập ghi chú'></Input>
          </div>

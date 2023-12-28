@@ -2,7 +2,7 @@ import React,{useEffect} from 'react'
 import MenuHeader from '../Components/MenuHeader'
 import { useDispatch, useSelector } from 'react-redux'
 import { DeleteCamnang, DeleteCar, GetAllCar, GetCarOwner } from '../Redux/Actions/ManagerAction';
-import { DeleteOutlined, EditOutlined, UserOutlined,  CalendarOutlined, CarOutlined, DollarOutlined, EnvironmentOutlined, HomeOutlined, MessageOutlined, CheckCircleFilled } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, UserOutlined,  CalendarOutlined, CarOutlined, DollarOutlined, EnvironmentOutlined, HomeOutlined, MessageOutlined, CheckCircleFilled, IdcardOutlined } from "@ant-design/icons";
 import { } from "@ant-design/icons";
 
 import { Button } from 'antd';
@@ -60,6 +60,9 @@ export default function Quanlythuexe() {
             </p>
             <p>
               <b><UserOutlined /> Tên người thuê:</b> {item.username}
+            </p>
+            <p>
+              <b><IdcardOutlined /> Căn cước:</b> {item.cancuoc}
             </p>
             <p>
               <b><DollarOutlined /> Giá cho thuê:</b> {formatter.format(getCar(item.carID)?.cost)}

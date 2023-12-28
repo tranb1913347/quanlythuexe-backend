@@ -13,7 +13,7 @@ import ThuexeForm from '../Components/ThuexeForm';
 export default function Danhsachxe() {
 
     const dispatch = useDispatch();
-    const {carList} = useSelector(state => state.ManagerReducer);
+    const {carList, rentalList} = useSelector(state => state.ManagerReducer);
     const navigate = useNavigate();
 
     let userData = localStorage.getItem("login_user");
@@ -36,6 +36,7 @@ export default function Danhsachxe() {
       currency: 'VND',
     });
 
+
     const CarContent = carList.map((item, index) => {
         return  <div key={index} className='bg-blue-50 shadow-md w-full rounded-sm py-5 px-2 relative'>
         <div className='w-full rounded-md overflow-hidden h-56 mr-10'
@@ -55,11 +56,19 @@ export default function Danhsachxe() {
           <p>Số chổ: {item.numberOfSeat}</p>
           <p>Giá cho thuê: {formatter.format(item.cost)}</p>
           <p style={{whiteSpace: 'pre-line'}}>Mô tả: {item.description}</p>
+          {(item.status === 'FREE') ? 
           <button onClick={() => {
             if(userData.id)
             editCarButton(item)
             else alert("Vui lòng đăng nhập!")
-          }} className='bg-red-500 text-white w-40 rounded-md p-2 ml-20 mt-5 shadow-lg hover:scale-110 duration-100'>Thuê ngay!</button>
+          }} className='bg-red-500 text-white w-40 rounded-md p-2 ml-20 mt-5 shadow-lg hover:scale-110 duration-100'>Thuê ngay
+          </button>
+          :
+          <button onClick={() => {
+          }} className='bg-slate-500 text-white w-40 cursor-not-allowed rounded-md p-2 ml-20 mt-5 shadow-lg'>Xe bận
+          </button>
+        }
+          
         </div>
   
       </div> 
@@ -68,7 +77,9 @@ export default function Danhsachxe() {
   useEffect(() => {
 
         dispatch(GetAllCar());
-    
+        dispatch(GetAllCar());
+
+
 }, [])
 
   return (
